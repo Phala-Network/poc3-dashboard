@@ -7,7 +7,6 @@ import {Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import Lottery from './Lottery';
 import Head from './Head';
 import Data from './Data';
 import styled from 'styled-components';
@@ -59,7 +58,6 @@ const App = ({ data }) => {
       {data
         ? <>
           <Head />
-          {/* <Lottery /> */}
           <Data />
           <Foot />
         </>
