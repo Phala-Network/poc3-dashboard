@@ -13,6 +13,7 @@ export default () => {
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto" />
             <Nav activeKey="##">
+                <NavLink eventKey={false} target="_blank" href="/dashboard">Dashboard I</NavLink>
                 <NavLink eventKey={false} target="_blank" href="https://medium.com/phala-network/1-000-000-pha-announcing-1605-race-gkol-workshop-and-bounties-6319d3d62032">Rules</NavLink>
                 <NavLink eventKey={false} target="_blank" href="https://wiki.phala.network/en-us/docs/poc3/">Join</NavLink>
                 <NavLink eventKey={false} target="_blank" href="https://medium.com/phala-network/phala-testnet-vendetta-is-live-57089f4657cc">Events</NavLink>

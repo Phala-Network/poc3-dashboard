@@ -1,6 +1,6 @@
 {
   "name": "poc3-dashboard",
-  "homepage": "https://poc3.phala.network/dashboard",
+  "homepage": "https://poc3.phala.network/dashboard2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,6 +14,7 @@
     "react-bootstrap": "^1.4.0",
     "react-bootstrap-icons": "^1.1.0",
     "react-dom": "^17.0.1",
+    "react-loading": "^2.0.3",
     "react-scripts": "4.0.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"

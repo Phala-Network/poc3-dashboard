@@ -9,34 +9,25 @@ import './App.css';
 
 import Lottery from './Lottery';
 import Head from './Head';
-import { defaultData } from './utils';
 import Data from './Data';
 import styled from 'styled-components';
+import ReactLoading from 'react-loading'
 
 const AppDataContext = createContext();
 const useAppData = () => useContext(AppDataContext);
 
 const AppWrapper = () => {
-  const [data, setData] = useState(defaultData);
-  const [lottery, setLottery] = useState([]);
+  const [data, setData] = useState(undefined);
 
   const updateData = useCallback(async () => {
-    const path = process.env.REACT_APP_RESULT_URL || (
-      process.env.REACT_APP_ENV === 'development'
-        ? './testdata.json' : './result.json');
+    const path = process.env.REACT_APP_RESULT_URL || '/dashboard2_data';
     const resp = await Axios.get(path);
     setData(resp.data);
-    setLottery([
-      resp.data.lotteryPool1,
-      resp.data.lotteryPool2,
-      resp.data.lotteryPool3
-    ].map(x => JSON.parse(x))
-      .filter(x => x.length > 0))
-  }, [setData, setLottery]);
+  }, [setData]);
 
-  const dt = useMemo(() => (Date.now() - data.timestamp) / 1000, [data]);
+  const dt = useMemo(() => data ? (Date.now() - data.updatedAt) / 1000 : '...', [data]);
 
-  const contextValue = useMemo(() => ({ data, lottery, dt }), [data, lottery, dt])
+  const contextValue = useMemo(() => ({ data, dt }), [data, dt])
 
   useEffect(() => {
     updateData();
@@ -47,17 +38,32 @@ const AppWrapper = () => {
   }, [updateData])
 
   return <AppDataContext.Provider value={contextValue}>
-    <App />
+    <App data={data} />
   </AppDataContext.Provider>
 }
 
-const App = () => {
+const LoadingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  place-content: center;
+  height: 100vh;
+  width: 100vw;
+`
+const Loading = () => <LoadingWrapper>
+  <ReactLoading type={'bubbles'} color={'#ffffff'} height={'60px'} width={'60px'} />
+</LoadingWrapper>
+
+const App = ({ data }) => {
   return (
     <div className="App">
-      <Head />
-      <Lottery />
-      <Data />
-      <Foot />
+      {data
+        ? <>
+          <Head />
+          {/* <Lottery /> */}
+          <Data />
+          <Foot />
+        </>
+        : <Loading />}
     </div>
   );
 }
@@ -71,7 +77,7 @@ const Foot = () => {
   const { data, dt } = useAppData()
   return <section>
     <Container>
-      <FootLine className="theme-dark">2020 Phala Network - Mining round: {data.round} - Last updated: {dt}s ago</FootLine>
+      <FootLine className="theme-dark">2020 Phala Network - Mining round: {data.roundNumber} - Last updated: {dt}s ago</FootLine>
     </Container>
   </section>
 }

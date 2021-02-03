@@ -1,20 +1,39 @@
-import { Container, Table, InputGroup, FormControl } from "react-bootstrap";
+import { Container, Table, InputGroup, FormControl, ButtonToolbar, ButtonGroup, Button } from "react-bootstrap";
 import { useAppData } from "./App";
-import { formatFire } from "./utils";
+import { formatPercentage } from "./utils";
 import {
   Search as SearchIcon,
   XCircle as XCircleIcon,
 } from "react-bootstrap-icons";
 import { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
+import BN from "bn.js";
 
 const NotFoundLine = styled.p`
   text-align: center;
   width: 100%;
 `;
 
+const getSubStr = str => {
+  const subStr1 = str.substr(0, 6)
+  const subStr2 = str.substr(str.length - 6, 6)
+  return subStr1 + '...' + subStr2
+}
+
 const Data = () => {
   const { data } = useAppData();
+  const payoutAccounts = useMemo(() =>
+    Object.keys(data.payoutAccounts)
+      .map(i => ({
+        ...data.payoutAccounts[i],
+        targetAddress: i,
+        targetAddressHuman: getSubStr(i),
+        fire2Bn: new BN(data.payoutAccounts[i].fire2)
+      }))
+      .sort((a, b) => !(b.fire2Bn.sub(a.fire2Bn).isNeg()))
+  )
+  console.log(payoutAccounts)
+
   const [filter, setFilter] = useState("");
 
   const isFilterValid = useMemo(() => filter.trim().length > 0, [filter]);
@@ -23,7 +42,7 @@ const Data = () => {
       return true;
     }
     return (
-      data.dashboard.filter((i) => i.targetAddress.indexOf(filter) > -1)
+      payoutAccounts.filter((i) => i.targetAddress.indexOf(filter) > -1)
         .length > 0
     );
   }, [data, filter, isFilterValid]);
@@ -38,6 +57,15 @@ const Data = () => {
   return (
     <section className="page-data color-white">
       <Container>
+        <ButtonToolbar className="justify-content-between">
+          <ButtonGroup>
+            <Button as="a" variant="light">Staking Calculator</Button>
+          </ButtonGroup>
+          <ButtonGroup>
+            <Button as="a" target="_blank" href="https://google.com" variant="light">tPHA Swap</Button>
+            <Button as="a" target="_blank" href="https://poc3.phala.network/polkadotjs/#/staking" variant="light">Add Stake</Button>
+          </ButtonGroup>
+        </ButtonToolbar>
         <InputGroup className="mb-3">
           <InputGroup.Prepend>
             <InputGroup.Text>
@@ -65,35 +93,39 @@ const Data = () => {
               <th>Rank</th>
               <th>Payout Address</th>
               <th>Miners</th>
-              <th>Fire</th>
-              {/* <th>CPU Power</th> */}
-              <th>%</th>
+              <th>Staking Amount</th>
+              <th>Staking Ratio</th>
+              <th>Fire2</th>
+              <th>Prize Ratio</th>
             </tr>
           </thead>
           <tbody>
             {isFilterValid
-              ? data.dashboard.map((whale, idx) =>
-                  whale.targetAddress.indexOf(filter) > -1 ? (
-                    <tr key={idx}>
-                      <td>{idx + 1}</td>
-                      <td>{whale.targetAddress}</td>
-                      <td>{whale.targetState.length}</td>
-                      <td>{formatFire(whale.targetFire)}</td>
-                      {/* <td>{totalHashPower(whale.targetState)}</td> */}
-                      <td>{whale.targetFireRatio}</td>
-                    </tr>
-                  ) : null
-                )
-              : data.dashboard.map((whale, idx) => (
+              ? payoutAccounts.map((whale, idx) =>
+                whale.targetAddress.indexOf(filter) > -1 ? (
                   <tr key={idx}>
                     <td>{idx + 1}</td>
+                    {/* <td>{whale.targetAddressHuman}</td> */}
                     <td>{whale.targetAddress}</td>
-                    <td>{whale.targetState.length}</td>
-                    <td>{formatFire(whale.targetFire)}</td>
-                    {/* <td>{totalHashPower(whale.targetState)}</td> */}
-                    <td>{whale.targetFireRatio}</td>
+                    <td>{whale.workerCount}</td>
+                    <td>{whale.stakeHuman}</td>
+                    <td>{formatPercentage(whale.stakeRatio)}</td>
+                    <td>{whale.fire2Human}</td>
+                    <td>{formatPercentage(whale.prizeRatio)}</td>
                   </tr>
-                ))}
+                ) : null
+              )
+              : payoutAccounts.map((whale, idx) => (
+                <tr key={idx}>
+                  <td>{idx + 1}</td>
+                  <td>{whale.targetAddressHuman}</td>
+                  <td>{whale.workerCount}</td>
+                  <td>{whale.stakeHuman}</td>
+                  <td>{formatPercentage(whale.stakeRatio)}</td>
+                  <td>{whale.fire2Human}</td>
+                  <td>{formatPercentage(whale.prizeRatio)}</td>
+                </tr>
+              ))}
           </tbody>
         </Table>
         {!isFilterHasResult ? <NotFoundLine>Not Found</NotFoundLine> : null}

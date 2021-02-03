@@ -1,9 +1,9 @@
 import AppNavBar from "./AppNavBar";
 import { Container } from "react-bootstrap";
-import { perc } from "./utils";
 import { useAppData } from "./App";
 import styled from "styled-components";
 import { useMemo } from "react";
+import { formatNumber } from "./utils";
 
 const kUnlockHashPowerThreshold = [0, 140000, 280000, 560000];
 const kUnlockHashPowerMax =
@@ -54,56 +54,6 @@ const Popover = () => {
   );
 };
 
-function ProgressBar({ currentPower }) {
-  const progress = currentPower / kUnlockHashPowerMax;
-  return (
-    <>
-      <div className="progress-bar">
-        <div className="indicator" style={{ width: perc(progress) }}>
-          <Popover />
-        </div>
-        <div className="base-label">Base: 500k PHA</div>
-        <div
-          className="marker"
-          style={{
-            left: perc(kUnlockHashPowerThreshold[1] / kUnlockHashPowerMax),
-          }}
-        >
-          <div className="label">
-            140k POWER
-            <br />
-            600k PHA
-          </div>
-        </div>
-        <div
-          className="marker"
-          style={{
-            left: perc(kUnlockHashPowerThreshold[2] / kUnlockHashPowerMax),
-          }}
-        >
-          <div className="label">
-            280k POWER
-            <br />
-            700k PHA
-          </div>
-        </div>
-        <div
-          className="marker"
-          style={{
-            left: perc(kUnlockHashPowerThreshold[3] / kUnlockHashPowerMax),
-          }}
-        >
-          <div className="label">
-            560k POWER
-            <br />
-            800k PHA
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
 const DescLine = styled.p`
   font-style: normal;
   font-weight: normal;
@@ -112,17 +62,20 @@ const DescLine = styled.p`
 
   color: #ffffff;
   margin: 21px auto 56px;
+
+  a {
+    text-decoration: underline;
+  }
 `;
 
 const Head = () => {
-  const { data } = useAppData();
   return (
     <section className="page-head color-white">
       <div className="bg" />
       <AppNavBar />
       <Container>
         <h5 className="color-primary">Phala Testnet Vendetta</h5>
-        <h1 className="color-primary">1605 Miner Race</h1>
+        <h1 className="color-primary">1605 Miner Race II</h1>
         <DescLine>
           1605 Race is a miner competition to stress-test Phala Testnet
           Vendetta. The prize pool will be unlocked according to "power"
@@ -145,13 +98,67 @@ const Head = () => {
           ) will share 720,000 Fires to improve their final ratio and earn more
           PHA.
         </DescLine>
-
-        <h5>Total Prize Pool</h5>
-
-        <ProgressBar currentPower={data.maxTotalPower} />
+        <InfoLine />
       </Container>
     </section>
   );
 };
+
+const TotalPrizeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #D1FF52;
+  color: black;
+  width: fit-content;
+  padding: 10px 36px 0px 15px;
+  p, h1 {
+    width: fit-content;
+  }
+  h1 {
+    font-size: 1rem;
+  }
+  p {
+    font-size: 1.8rem;
+    line-height: 1.4rem;
+  }
+`
+const TotalPrize = () => {
+  return <TotalPrizeWrapper>
+    <h1>Total Prize Pool</h1>
+    <p>100,000 PHA</p>
+  </TotalPrizeWrapper>
+}
+
+const TotalInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0 24px;
+  place-content: center;
+  p {
+    line-height: 1.3rem;
+    font-size: 0.9rem;
+    margin: 0;
+    width: fit-content;
+  }
+`
+const TotalInfo = () => {
+  const { data } = useAppData()
+  return <TotalInfoWrapper>
+    <p>Power: {formatNumber(data.totalPower)}</p>
+    <p>Miners：{formatNumber(data.onlineWorkers)}</p>
+    <p>Total Staking：{data.accumulatedStakeHuman}PHA</p>
+  </TotalInfoWrapper>
+}
+
+const InfoLineWrapper = styled.div`
+  display: flex;
+  margin: -24px 0 20px;
+`
+const InfoLine = () => {
+  return <InfoLineWrapper>
+    <TotalPrize />
+    <TotalInfo />
+  </InfoLineWrapper>
+}
 
 export default Head;

@@ -38,3 +38,11 @@ export function perc(x) {
 }
 
 export function noop() {}
+
+export function formatNumber (num) {
+  return `${num}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
+export function formatPercentage (num) {
+  return `${num * 100 / 1.0000}%`
+}
