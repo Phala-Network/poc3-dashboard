@@ -44,5 +44,5 @@ export function formatNumber (num) {
 }
 
 export function formatPercentage (num) {
-  return `${num * 100 / 1.0000}%`
+  return `${Math.round(num * 10000.00) / 100.00}%`
 }

@@ -59,10 +59,11 @@ const Data = () => {
       <Container>
         <ButtonToolbar className="justify-content-between">
           <ButtonGroup>
-            <Button as="a" variant="light">Staking Calculator</Button>
+            {/* <Button as="a" variant="light">Staking Calculator</Button> */}
           </ButtonGroup>
           <ButtonGroup>
-            <Button as="a" target="_blank" href="https://google.com" variant="light">tPHA Swap</Button>
+            <Button as="a" target="_blank" href="https://poc3-swap.phala.network/" variant="light">tPHA Swap</Button>
+            <div style={{ width: 12 }} />
             <Button as="a" target="_blank" href="https://poc3.phala.network/polkadotjs/#/staking" variant="light">Add Stake</Button>
           </ButtonGroup>
         </ButtonToolbar>

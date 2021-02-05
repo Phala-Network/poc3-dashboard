@@ -77,26 +77,7 @@ const Head = () => {
         <h5 className="color-primary">Phala Testnet Vendetta</h5>
         <h1 className="color-primary">1605 Miner Race II</h1>
         <DescLine>
-          1605 Race is a miner competition to stress-test Phala Testnet
-          Vendetta. The prize pool will be unlocked according to "power"
-          contributed by each miner, and PHA rewards will be distributed to your{" "}
-          <a
-            className="color-primary"
-            href="https://forum.phala.network/t/how-to-create-a-phala-account-on-testnet-vendetta/1253"
-          >
-            Phala account
-          </a>{" "}
-          according to the ratio of your fire at the end of Jan 1. A Firedrop
-          will be triggered each time when the prize pool breaks into the next
-          stage, and **5%** of all the qualified miners(running for more than 6{" "}
-          <a
-            className="color-primary"
-            href="https://wiki.phala.network/en-us/docs/poc3/4-faq/"
-          >
-            rounds
-          </a>
-          ) will share 720,000 Fires to improve their final ratio and earn more
-          PHA.
+          1605 Race V1 had ended at the beginning of 2021. And now, to achieve the optimal matching of privacy computing equipment and tasks furtherly, 1605 Race V2 goes live, and the computing task system will be launched officially, which is also a foresight of Phala mainnet’s computing tasks system.
         </DescLine>
         <InfoLine />
       </Container>
@@ -146,7 +127,7 @@ const TotalInfo = () => {
   return <TotalInfoWrapper>
     <p>Power: {formatNumber(data.totalPower)}</p>
     <p>Miners：{formatNumber(data.onlineWorkers)}</p>
-    <p>Total Staking：{data.accumulatedStakeHuman}PHA</p>
+    <p>Total Staking：{data.accumulatedStakeHuman}</p>
   </TotalInfoWrapper>
 }
 
