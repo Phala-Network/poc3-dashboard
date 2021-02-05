@@ -5,7 +5,7 @@ html {
 
 body {
   overflow-x: hidden;
-  background-image: url(./bg/noise.png);
+  background: #131313;
 }
 
 .App {
@@ -32,7 +32,7 @@ section {
 }
 
 .page-data {
-  padding-top: 36px;
+  padding-top: 0;
 }
 
 .page-data .btn {
@@ -51,9 +51,8 @@ section {
   top: 0;
   width: 100%;
   height: 400px;
-  background:
-    linear-gradient(to bottom, rgba(0,0,0,0.5), #131313),
-    url(./bg/windsor_castle.png) no-repeat;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, #131313 90%),
+    url(./bg/windsor_castle.jpg) no-repeat;
   background-size: cover;
   background-position: center top;
 }
