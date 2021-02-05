@@ -32,7 +32,7 @@ const AppWrapper = () => {
     updateData();
     const i = setInterval(() => {
       updateData();
-    }, 6000);
+    }, 60000);
     return () => clearInterval(i);
   }, [updateData])
 

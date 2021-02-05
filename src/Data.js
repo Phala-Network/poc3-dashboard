@@ -31,8 +31,7 @@ const Data = () => {
         fire2Bn: new BN(data.payoutAccounts[i].fire2)
       }))
       .sort((a, b) => !(b.fire2Bn.sub(a.fire2Bn).isNeg()))
-  )
-  console.log(payoutAccounts)
+  , [data])
 
   const [filter, setFilter] = useState("");
 
@@ -45,7 +44,7 @@ const Data = () => {
       payoutAccounts.filter((i) => i.targetAddress.indexOf(filter) > -1)
         .length > 0
     );
-  }, [data, filter, isFilterValid]);
+  }, [filter, isFilterValid, payoutAccounts])
 
   const onFilterChange = useCallback(
     (e) => {

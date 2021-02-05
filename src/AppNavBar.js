@@ -7,7 +7,7 @@ const NavLink = styled(Nav.Link)`
 `
 
 
-export default () => {
+const AppNavBar = () => {
     return <Navbar collapseOnSelect expand="md" bg="transparent" variant="dark">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -23,3 +23,5 @@ export default () => {
         </Navbar.Collapse>
     </Navbar>
 }
+
+export default AppNavBar

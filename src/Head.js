@@ -2,57 +2,7 @@ import AppNavBar from "./AppNavBar";
 import { Container } from "react-bootstrap";
 import { useAppData } from "./App";
 import styled from "styled-components";
-import { useMemo } from "react";
 import { formatNumber } from "./utils";
-
-const kUnlockHashPowerThreshold = [0, 140000, 280000, 560000];
-const kUnlockHashPowerMax =
-  kUnlockHashPowerThreshold[kUnlockHashPowerThreshold.length - 1];
-
-const PopoverWrapper = styled.div`
-  position: relative;
-  background: #d1ff52;
-  border-radius: 5px;
-  color: black;
-  width: 212px;
-  height: 61px;
-  left: 106px;
-  top: -81px;
-  display: flex;
-  align-items: center;
-  place-content: center;
-  font-size: 17px;
-  line-height: 20px;
-  text-align: center;
-
-  color: #000000;
-
-  &:after {
-    content: " ";
-    position: absolute;
-    top: 100%; /* At the bottom of the tooltip */
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #d1ff52 transparent transparent transparent;
-  }
-`;
-
-const Popover = () => {
-  const { data } = useAppData();
-  const onlineTimeMap = useMemo(() => {
-    return JSON.parse(data.onlineTimeMap || '[]')
-  }, [data]);
-
-  return (
-    <PopoverWrapper>
-      Power: {`${data.currentTotalPower}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-      <br />
-      Miners: {onlineTimeMap.length}
-    </PopoverWrapper>
-  );
-};
 
 const DescLine = styled.p`
   font-style: normal;
