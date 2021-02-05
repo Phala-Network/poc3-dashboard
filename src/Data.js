@@ -8,6 +8,7 @@ import {
 import { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import BN from "bn.js";
+import { orderBy } from 'lodash';
 
 const NotFoundLine = styled.p`
   text-align: center;
@@ -22,16 +23,16 @@ const getSubStr = str => {
 
 const Data = () => {
   const { data } = useAppData();
-  const payoutAccounts = useMemo(() =>
-    Object.keys(data.payoutAccounts)
+  const payoutAccounts = useMemo(() => {
+    const _data = Object.keys(data.payoutAccounts)
       .map(i => ({
         ...data.payoutAccounts[i],
         targetAddress: i,
         targetAddressHuman: getSubStr(i),
         fire2Bn: new BN(data.payoutAccounts[i].fire2)
       }))
-      .sort((a, b) => !(b.fire2Bn.sub(a.fire2Bn).isNeg()))
-  , [data])
+    return orderBy(_data, ['prizeRatio'], ['desc'])
+  }, [data])
 
   const [filter, setFilter] = useState("");
 
@@ -92,7 +93,7 @@ const Data = () => {
             <tr className="color-primary">
               <th>Rank</th>
               <th>Payout Address</th>
-              <th>Miners</th>
+              <th>Online Miners</th>
               <th>Staking Amount</th>
               <th>Staking Ratio</th>
               <th>Fire2</th>
