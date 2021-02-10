@@ -64,7 +64,7 @@ const Data = () => {
           <ButtonGroup>
             <Button as="a" target="_blank" href="https://poc3-swap.phala.network/" variant="light">tPHA Swap</Button>
             <div style={{ width: 12 }} />
-            <Button as="a" target="_blank" href="https://poc3.phala.network/polkadotjs/#/staking" variant="light">Add Stake</Button>
+            <Button as="a" target="_blank" href="https://poc3.phala.network/polkadotjs/#/extrinsics" variant="light">Add Stake</Button>
           </ButtonGroup>
         </ButtonToolbar>
         <InputGroup className="mb-3">
