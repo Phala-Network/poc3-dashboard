@@ -91,13 +91,14 @@ const Data = () => {
         <Table responsive borderless variant="dark" size="sm" hover>
           <thead className="higher">
             <tr className="color-primary">
-              <th>Rank</th>
-              <th>Payout Address</th>
-              <th>Online Miners</th>
-              <th>Staking Amount</th>
-              <th>Staking Ratio</th>
-              <th>Fire2</th>
-              <th>Prize Ratio</th>
+              <th className="datath">Rank</th>
+              <th className="datath">Payout Address</th>
+              <th className="datath">Online Miners</th>
+              <th className="datath">Staking Amount</th>
+              <th className="datath">Staking Ratio</th>
+              <th className="datath">Compute Rewards</th>
+              <th className="datath">Fire2</th>
+              <th className="datath">Prize Ratio</th>
             </tr>
           </thead>
           <tbody>
@@ -105,26 +106,28 @@ const Data = () => {
               ? payoutAccounts.map((whale, idx) =>
                 whale.targetAddress.indexOf(filter) > -1 ? (
                   <tr key={idx}>
-                    <td>{idx + 1}</td>
+                    <td className="datath">{idx + 1}</td>
                     {/* <td>{whale.targetAddressHuman}</td> */}
-                    <td>{whale.targetAddress}</td>
-                    <td>{whale.workerCount}</td>
-                    <td>{whale.stakeHuman}</td>
-                    <td>{formatPercentage(whale.stakeRatio)}</td>
-                    <td>{whale.fire2Human}</td>
-                    <td>{formatPercentage(whale.prizeRatio)}</td>
+                    <td className="datath">{whale.targetAddress}</td>
+                    <td className="datath">{whale.workerCount}</td>
+                    <td className="datath">{whale.stakeHuman}</td>
+                    <td className="datath">{formatPercentage(whale.stakeRatio)}</td>
+                    <td className="datath">{whale.payoutComputeReward}</td>
+                    <td className="datath">{whale.fire2Human}</td>
+                    <td className="datath">{formatPercentage(whale.prizeRatio)}</td>
                   </tr>
                 ) : null
               )
               : payoutAccounts.map((whale, idx) => (
                 <tr key={idx}>
-                  <td>{idx + 1}</td>
-                  <td>{whale.targetAddressHuman}</td>
-                  <td>{whale.workerCount}</td>
-                  <td>{whale.stakeHuman}</td>
-                  <td>{formatPercentage(whale.stakeRatio)}</td>
-                  <td>{whale.fire2Human}</td>
-                  <td>{formatPercentage(whale.prizeRatio)}</td>
+                  <td className="datath">{idx + 1}</td>
+                  <td className="datath">{whale.targetAddressHuman}</td>
+                  <td className="datath">{whale.workerCount}</td>
+                  <td className="datath">{whale.stakeHuman}</td>
+                  <td className="datath">{formatPercentage(whale.stakeRatio)}</td>
+                  <td className="datath">{whale.payoutComputeReward}</td>
+                  <td className="datath">{whale.fire2Human}</td>
+                  <td className="datath">{formatPercentage(whale.prizeRatio)}</td>
                 </tr>
               ))}
           </tbody>

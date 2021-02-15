@@ -172,3 +172,7 @@ table.table-dark.table-hover tbody tr:hover {
   color: white !important;
 }
 
+.datath {
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+}

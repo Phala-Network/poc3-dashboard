@@ -28,6 +28,9 @@ const Head = () => {
         <h1 className="color-primary">1605 Miner Race II</h1>
         <DescLine>
           1605 Race V1 had ended at the beginning of 2021. And now, to achieve the optimal matching of privacy computing equipment and tasks furtherly, 1605 Race V2 goes live, and the computing task system will be launched officially, which is also a foresight of Phala mainnet’s computing tasks system.
+          <br />
+          <br />
+          On average, a computation worker can get 2 payouts in one round.
         </DescLine>
         <InfoLine />
       </Container>
