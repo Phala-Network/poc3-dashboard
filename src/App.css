@@ -155,17 +155,17 @@ table.table-dark.table-hover tbody tr:hover {
   color: #fff;
 }
 
-.input-group {
+.filter .input-group {
   border: 3px solid #828282;
 }
 
-.input-group-text {
+.filter .input-group-text {
   background: black;
   border: 0;
   color: #878787;
 }
 
-.form-control {
+.filter .form-control {
   border-radius: 0 !important;
   border: 0px solid #828282;
   background: black !important;
