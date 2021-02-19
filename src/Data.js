@@ -114,7 +114,7 @@ const Calculator = () => {
                   min="0"
                 />
                 <InputGroup.Append>
-                  <InputGroup.Text>PHA</InputGroup.Text>
+                  <InputGroup.Text>tPHA</InputGroup.Text>
                 </InputGroup.Append>
               </InputGroup>
             </Col>
@@ -222,10 +222,10 @@ const Data = () => {
               <th className="datath">Rank</th>
               <th className="datath">Payout Address</th>
               <th className="datath">Online Miners</th>
-              <th className="datath">Staking Amount</th>
+              <th className="datath">Staking Amount (tPHA)</th>
               <th className="datath">Staking Ratio</th>
               <th className="datath">Compute Rewards</th>
-              <th className="datath">Fire2</th>
+              <th className="datath">Fire2 (tPHA)</th>
               <th className="datath">Prize Ratio</th>
             </tr>
           </thead>

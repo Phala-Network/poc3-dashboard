@@ -80,7 +80,7 @@ const TotalInfo = () => {
   return <TotalInfoWrapper>
     <p>Power: {formatNumber(data.totalPower)}</p>
     <p>Miners：{formatNumber(data.onlineWorkers)}</p>
-    <p>Total Staking：{data.accumulatedStakeHuman}</p>
+    <p>Total Staking：{data.accumulatedStakeHuman} tPHA</p>
   </TotalInfoWrapper>
 }
 
